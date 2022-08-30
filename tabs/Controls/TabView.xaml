@@ -19,11 +19,13 @@
             HorizontalScrollBarVisibility="Default">
             <HorizontalStackLayout>
                 <CollectionView
+                    x:Name="TabPageCollection"
                     ItemsSource="{Binding TabPages, Source={x:Reference Root}}"
                     ItemSizingStrategy="MeasureAllItems"
                     Margin="0"
                     ItemsUpdatingScrollMode="KeepScrollOffset"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    SelectionChanged="CollectionView_SelectionChanged">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout
                             Orientation="Horizontal"
@@ -68,6 +70,10 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </HorizontalStackLayout>
+        </ScrollView>
+        <ScrollView Grid.Row="2">
+            <ContentView x:Name="TabContent">
+            </ContentView>
         </ScrollView>
     </Grid>
 </ContentView>

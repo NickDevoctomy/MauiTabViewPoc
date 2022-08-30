@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace tabs.Controls
 {
-    public class TabViewPage
+    public partial class TabViewPage : ObservableObject
     {
-        public string Title { get; set; }
-        public double Width { get; set; } = 60d;
+        [ObservableProperty]
+        private string title;
+
+        [ObservableProperty]
+        private double width = 60d;
+
+        [ObservableProperty]
+        private Type contentType;
     }
 }

@@ -2,14 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:tabs.Controls"
+             xmlns:views="clr-namespace:tabs.Views"
              x:Class="tabs.MainPage">
 
-    <controls:TabView>
+    <controls:TabView x:Name="Tabs">
         <controls:TabView.TabPages>
-            <controls:TabViewPage Title="Apple"/>
-            <controls:TabViewPage Title="Orange"/>
-            <controls:TabViewPage Title="Pear"/>
+            <controls:TabViewPage Title="Apple" ContentType="{x:Type views:AppleView}"/>
+            <controls:TabViewPage Title="Orange" ContentType="{x:Type views:OrangeView}"/>
+            <controls:TabViewPage Title="Pear" ContentType="{x:Type views:PearView}"/>
             <controls:TabViewPage Title="Banana"/>
+            <controls:TabViewPage Title="Peach"/>
+            <controls:TabViewPage Title="Clementine"/>
+            <controls:TabViewPage Title="Melon"/>
         </controls:TabView.TabPages>
     </controls:TabView>
 </ContentPage>
