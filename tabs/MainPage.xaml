@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:tabs.Controls"
+             x:Class="tabs.MainPage">
+
+    <controls:TabView>
+        <controls:TabView.TabPages>
+            <controls:TabViewPage Title="Apple"/>
+            <controls:TabViewPage Title="Orange"/>
+            <controls:TabViewPage Title="Pear"/>
+            <controls:TabViewPage Title="Banana"/>
+        </controls:TabView.TabPages>
+    </controls:TabView>
+</ContentPage>

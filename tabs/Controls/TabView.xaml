@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:tabs.Converters"
+             xmlns:local="clr-namespace:tabs.Controls"
+             x:Class="tabs.Controls.TabView"
+             x:DataType="local:TabView"
+             x:Name="Root">
+    <ContentView.Resources>
+        <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+    </ContentView.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding TabHeight, Source={x:Reference Root}, Converter={StaticResource DoubleToGridLengthConverter}, ConverterParameter=Absolute}"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollView
+            Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Default">
+            <HorizontalStackLayout>
+                <CollectionView
+                    ItemsSource="{Binding TabPages, Source={x:Reference Root}}"
+                    ItemSizingStrategy="MeasureAllItems"
+                    Margin="0"
+                    ItemsUpdatingScrollMode="KeepScrollOffset"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Horizontal"
+                            ItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:TabViewPage">
+                            <Grid HeightRequest="{Binding TabHeight, Source={x:Reference Root}}"
+                                  WidthRequest="100">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="8"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Text="{Binding Title}"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Rectangle
+                                    x:Name="TabAccent"
+                                    Grid.Row="1">
+                                </Rectangle>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter TargetName="TabAccent" Property="BackgroundColor" Value="{Binding TabAccentColour, Source={x:Reference Root}}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter TargetName="TabAccent" Property="BackgroundColor" Value="{Binding SelectedTabAccentColour, Source={x:Reference Root}}"/>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </HorizontalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentView>
