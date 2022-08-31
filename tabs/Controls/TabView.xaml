@@ -17,12 +17,10 @@
         <ScrollView
             Orientation="Horizontal"
             HorizontalScrollBarVisibility="Default">
-            <HorizontalStackLayout>
+            <HorizontalStackLayout x:Name="pop">
                 <CollectionView
                     x:Name="TabPageCollection"
                     ItemsSource="{Binding TabPages, Source={x:Reference Root}}"
-                    ItemSizingStrategy="MeasureAllItems"
-                    Margin="0"
                     ItemsUpdatingScrollMode="KeepScrollOffset"
                     SelectionMode="Single"
                     SelectionChanged="CollectionView_SelectionChanged">

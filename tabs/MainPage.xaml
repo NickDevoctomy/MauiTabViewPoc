@@ -5,15 +5,22 @@
              xmlns:views="clr-namespace:tabs.Views"
              x:Class="tabs.MainPage">
 
-    <controls:TabView x:Name="Tabs">
-        <controls:TabView.TabPages>
-            <controls:TabViewPage Title="Apple" ContentType="{x:Type views:AppleView}"/>
-            <controls:TabViewPage Title="Orange" ContentType="{x:Type views:OrangeView}"/>
-            <controls:TabViewPage Title="Pear" ContentType="{x:Type views:PearView}"/>
-            <controls:TabViewPage Title="Banana"/>
-            <controls:TabViewPage Title="Peach"/>
-            <controls:TabViewPage Title="Clementine"/>
-            <controls:TabViewPage Title="Melon"/>
-        </controls:TabView.TabPages>
-    </controls:TabView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Text="Test" Clicked="Button_Clicked"/>
+        <controls:TabView x:Name="Tabs" Grid.Row="1">
+            <controls:TabView.TabPages>
+                <controls:TabViewPage Title="Apple" ContentType="{x:Type views:AppleView}"/>
+                <controls:TabViewPage Title="Orange" ContentType="{x:Type views:OrangeView}"/>
+                <controls:TabViewPage Title="Pear" ContentType="{x:Type views:PearView}"/>
+                <controls:TabViewPage Title="Banana"/>
+                <controls:TabViewPage Title="Peach"/>
+                <controls:TabViewPage Title="Clementine"/>
+                <controls:TabViewPage Title="Melon"/>
+            </controls:TabView.TabPages>
+        </controls:TabView>
+    </Grid>
 </ContentPage>

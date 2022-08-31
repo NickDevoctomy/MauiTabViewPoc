@@ -78,34 +78,7 @@ public partial class TabView : ContentView
         }
     }
 
-    public TabViewPage SelectedTabViewPage
-    {
-        get
-        {
-            return _selectedTabViewPage;
-        }
-        set
-        {
-            if(_selectedTabViewPage != value)
-            {
-                OnPropertyChanging(nameof(SelectedTabViewPage));
-                _selectedTabViewPage = value;
-                UpdateContentView();
-                SelectedTabViewPageChanged?.Invoke(
-                    this,
-                    new SelectedTabViewPageChangedEventArgs
-                    {
-                        SelectedTabViewPage = value
-                    });
-                OnPropertyChanged(nameof(SelectedTabViewPage));
-            }
-        }
-    }
-
     public ICommand SelectionChangedCommand { get; }
-
-    private TabViewPage _selectedTabViewPage;
-    private object _selectedItem;
 
     public TabView()
 	{
@@ -114,19 +87,20 @@ public partial class TabView : ContentView
 
     public void SelectPage(TabViewPage tabViewPage)
     {
-        SelectedTabViewPage = tabViewPage;
-        TabPageCollection.SelectedItems.Clear();
-        TabPageCollection.SelectedItems.Add(tabViewPage);
-        TabPageCollection.UpdateSelectedItems(new List<object> { tabViewPage });
+        // !!! For some reason the tab goes through the selection
+        // flow but the item doesn't get properly selected and
+        // the style does not get applied.
+        TabPageCollection.SelectedItem = tabViewPage;
     }
 
     private void UpdateContentView()
     {
-        if(SelectedTabViewPage != null && SelectedTabViewPage.ContentType != null)
+        var selectedTabPage = TabPageCollection.SelectedItem as TabViewPage;
+        if (selectedTabPage != null && selectedTabPage.ContentType != null)
         {
             // !!! Here we should use the container service provider to create instance of the view
             // but for the sake of this demo app, this works.
-            var content = (View)Activator.CreateInstance(SelectedTabViewPage.ContentType);
+            var content = (View)Activator.CreateInstance(selectedTabPage.ContentType);
             TabContent.Content = content;
         }
         else
@@ -137,6 +111,6 @@ public partial class TabView : ContentView
 
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        SelectedTabViewPage = e.CurrentSelection.Count == 0 ? null : (TabViewPage)e.CurrentSelection[0];
+        UpdateContentView();
     }
 }
