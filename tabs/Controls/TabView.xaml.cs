@@ -108,6 +108,12 @@ public partial class TabView : ContentView
         {
             TabContent.Content = null;
         }
+        SelectedTabViewPageChanged?.Invoke(
+            this,
+            new SelectedTabViewPageChangedEventArgs
+            {
+                SelectedTabViewPage = selectedTabPage
+            });
     }
 
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

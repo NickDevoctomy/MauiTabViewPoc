@@ -11,7 +11,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button Text="Test" Clicked="Button_Clicked"/>
-        <controls:TabView x:Name="Tabs" Grid.Row="1">
+        <controls:TabView x:Name="Tabs" Grid.Row="1" SelectedTabViewPageChanged="Tabs_SelectedTabViewPageChanged">
             <controls:TabView.TabPages>
                 <controls:TabViewPage Title="Apple" ContentType="{x:Type views:AppleView}"/>
                 <controls:TabViewPage Title="Orange" ContentType="{x:Type views:OrangeView}"/>
