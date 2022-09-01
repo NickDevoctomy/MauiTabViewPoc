@@ -5,6 +5,9 @@ namespace tabs.Controls
     public partial class TabViewPage : ObservableObject
     {
         [ObservableProperty]
+        private bool isSelected;
+
+        [ObservableProperty]
         private string title;
 
         [ObservableProperty]

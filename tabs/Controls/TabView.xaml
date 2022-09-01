@@ -8,6 +8,7 @@
              x:Name="Root">
     <ContentView.Resources>
         <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+        <converters:BoolToColourConverter x:Key="BoolToColourConverter" />
     </ContentView.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -43,26 +44,9 @@
                                     VerticalTextAlignment="Center"/>
                                 <Rectangle
                                     x:Name="TabAccent"
+                                    BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToColourConverter}, ConverterParameter='Blue,Red'}"
                                     Grid.Row="1">
                                 </Rectangle>
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroupList>
-                                        <VisualStateGroup x:Name="CommonStates">
-                                            <VisualState x:Name="Normal">
-                                                <VisualState.Setters>
-                                                    <Setter TargetName="TabAccent" Property="BackgroundColor" Value="{Binding TabAccentColour, Source={x:Reference Root}}"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                            <VisualState x:Name="Disabled">
-                                            </VisualState>
-                                            <VisualState x:Name="Selected">
-                                                <VisualState.Setters>
-                                                    <Setter TargetName="TabAccent" Property="BackgroundColor" Value="{Binding SelectedTabAccentColour, Source={x:Reference Root}}"/>
-                                                </VisualState.Setters>
-                                            </VisualState>
-                                        </VisualStateGroup>
-                                    </VisualStateGroupList>
-                                </VisualStateManager.VisualStateGroups>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

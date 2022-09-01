@@ -87,9 +87,10 @@ public partial class TabView : ContentView
 
     public void SelectPage(TabViewPage tabViewPage)
     {
-        // !!! For some reason the tab goes through the selection
-        // flow but the item doesn't get properly selected and
-        // the style does not get applied.
+        TabPages.ToList().ForEach((TabViewPage page) =>
+        {
+            page.IsSelected = page == tabViewPage;
+        });
         TabPageCollection.SelectedItem = tabViewPage;
     }
 
@@ -111,6 +112,18 @@ public partial class TabView : ContentView
 
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        var previousTabViewPage = (TabViewPage)e.PreviousSelection.FirstOrDefault();
+        if (previousTabViewPage != null)
+        {
+            previousTabViewPage.IsSelected = false;
+        }
+
+        var currentTabViewPage = (TabViewPage)e.CurrentSelection.FirstOrDefault();
+        if (currentTabViewPage != null)
+        {
+            currentTabViewPage.IsSelected = true;
+        }
+
         UpdateContentView();
     }
 }
